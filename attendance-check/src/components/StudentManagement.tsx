@@ -167,7 +167,7 @@ export default function StudentManagement({ open, onClose, attendances, students
           </Paper>
         </Box>
 
-        <Box>
+        <Box sx={{ mb: 3 }}>
           <Typography variant="h6" gutterBottom>
             전체 학생 목록
           </Typography>
