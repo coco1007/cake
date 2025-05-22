@@ -1,54 +1,71 @@
-# React + TypeScript + Vite
+# 출석체크 웹 애플리케이션
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + TypeScript + Vite + MongoDB + Vercel로 구현한 출석체크 웹 애플리케이션입니다.
 
-Currently, two official plugins are available:
+## 기능
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 학생 목록 관리
+- 출석 체크 (출석, 지각, 미인정)
+- 3일 이상 출석하지 않은 학생 목록
+- MongoDB 연동
 
-## Expanding the ESLint configuration
+## 기술 스택
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **프론트엔드**: React, TypeScript, Vite, Material-UI
+- **백엔드**: Vercel 서버리스 함수
+- **데이터베이스**: MongoDB
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 설치 및 실행
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+1. 저장소 클론
+   ```bash
+   git clone https://github.com/coco1007/cake.git
+   cd cake/attendance-check
+   ```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+2. 의존성 설치
+   ```bash
+   npm install
+   ```
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+3. 환경 변수 설정
+   - `.env.example` 파일을 `.env`로 복사하고 MongoDB 연결 정보 입력
+   ```
+   MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<database>?retryWrites=true&w=majority
+   ```
+
+4. 개발 서버 실행
+   ```bash
+   npm run dev
+   ```
+
+## 배포 (Vercel)
+
+1. Vercel CLI 설치
+   ```bash
+   npm install -g vercel
+   ```
+
+2. Vercel 로그인
+   ```bash
+   vercel login
+   ```
+
+3. 프로젝트 배포
+   ```bash
+   vercel
+   ```
+
+4. 환경 변수 설정
+   - Vercel 대시보드에서 `MONGODB_URI` 환경 변수 등록
+
+## API 엔드포인트
+
+- `GET /api/students`: 학생 목록 조회
+- `POST /api/students`: 학생 추가
+- `GET /api/attendances`: 출석 목록 조회
+- `POST /api/attendances`: 출석 추가
+
+## 라이선스
+
+MIT
